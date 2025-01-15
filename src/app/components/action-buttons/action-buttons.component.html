@@ -1,0 +1,15 @@
+<div class="flex justify-end space-x-2">
+    <button 
+      (click)="onCancel()" 
+      [ngClass]="cancelClass" 
+      class="px-4 py-2 rounded">
+      {{ cancelText }}
+    </button>
+    <button 
+      (click)="onConfirm()" 
+      [ngClass]="confirmClass" 
+      class="px-4 py-2 rounded">
+      {{ confirmText }}
+    </button>
+  </div>
+  

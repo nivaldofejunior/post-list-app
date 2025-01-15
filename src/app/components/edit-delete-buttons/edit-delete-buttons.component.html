@@ -1,0 +1,15 @@
+<div  class="flex justify-end space-x-2">
+    <button bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition
+      (click)="onEdit()" 
+      [ngClass]="editClass" 
+      class="px-4 py-2 rounded">
+      {{ editText }}
+    </button>
+    <button class="bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 transition"
+      (click)="onDelete()" 
+      [ngClass]="deleteClass" 
+      class="px-4 py-2 rounded">
+      {{ deleteText }}
+    </button>
+  </div>
+  

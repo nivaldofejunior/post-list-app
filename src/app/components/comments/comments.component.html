@@ -1,0 +1,59 @@
+<div class="mt-4">
+  <h3 class="text-lg font-bold mb-4">Comentários</h3>
+  <div *ngFor="let comment of comments" class="border border-gray-300 rounded-lg p-4 mb-4 bg-gray-50 shadow-md">
+    <p class="font-semibold text-gray-800">{{ comment.name }}</p>
+    <p class="text-gray-600 mt-2">{{ comment.body }}</p>
+    <app-edit-delete-buttons [editText]="'Editar'" [deleteText]="'Excluir'" (edit)="openEditCommentModal(comment)"
+      (delete)="deleteComment(comment.id)">
+    </app-edit-delete-buttons>
+  </div>
+
+  <form (ngSubmit)="addComment()" class="mt-6">
+    <h4 class="font-bold text-gray-800 mb-2">Adicionar Comentário</h4>
+    <textarea [(ngModel)]="newComment.body" name="body" placeholder="Digite seu comentário"
+      class="w-full border border-gray-300 rounded-lg p-3 shadow-sm mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+    </textarea>
+    <button type="submit" class="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition">
+      Adicionar
+    </button>
+  </form>
+</div>
+
+<div *ngIf="isEditCommentModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Editar Comentário</h2>
+    <form (ngSubmit)="saveEditComment()">
+      <div class="mb-4">
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+          Nome
+        </label>
+        <input id="name" type="text" [(ngModel)]="editingComment.name" name="name"
+          class="w-full border border-gray-300 rounded-lg p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          required />
+        <!-- exibe mensagem de erro se o campo estiver vazio ou com espaços em branco -->
+        <div *ngIf="editingComment.name?.trim() === ''" class="text-red-500 text-sm mt-1">
+          O nome não pode ser vazio ou conter apenas espaços.
+        </div>
+      </div>
+      <div class="mb-4">
+        <label for="body" class="block text-sm font-medium text-gray-700 mb-1">
+          Corpo do Comentário
+        </label>
+        <textarea id="body" [(ngModel)]="editingComment.body" name="body" rows="4"
+          class="w-full border border-gray-300 rounded-lg p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          required>
+        </textarea>
+        <!-- exibe mensagem de erro se o campo estiver vazio ou com espaços em branco -->
+        <div *ngIf="editingComment.body?.trim() === ''" class="text-red-500 text-sm mt-1">
+          O comentário não pode ser vazio ou conter apenas espaços.
+        </div>
+      </div>
+
+      <!-- Botões de ação -->
+      <app-action-buttons [confirmText]="'Salvar'" [cancelText]="'Cancelar'"
+        [disabled]="editingComment.body?.trim() === ''" (confirm)="saveEditComment()"
+        (cancel)="closeEditCommentModal()">
+      </app-action-buttons>
+    </form>
+  </div>
+</div>
