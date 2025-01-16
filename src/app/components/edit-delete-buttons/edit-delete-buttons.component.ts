@@ -8,14 +8,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   imports: [CommonModule]
 })
 export class EditDeleteButtonsInlineComponent {
-  @Input() editText: string = 'Editar'; // Texto do botão de edição
-  @Input() deleteText: string = 'Excluir'; // Texto do botão de exclusão
-  @Input() editClass: string = 'bg-blue-500 text-white hover:bg-blue-600'; // Classe de estilo para o botão de edição
-  @Input() deleteClass: string = 'bg-red-500 text-white hover:bg-red-600'; // Classe de estilo para o botão de exclusão
-  @Output() edit = new EventEmitter<void>(); // Evento ao clicar no botão de edição
-  @Output() delete = new EventEmitter<void>(); // Evento ao clicar no botão de exclusão
+  @Input() editText: string = 'Editar';
+  @Input() deleteText: string = 'Excluir';
+  @Input() editClass: string = 'bg-blue-500 text-white hover:bg-blue-600';
+  @Input() deleteClass: string = 'bg-red-500 text-white hover:bg-red-600';
+  @Output() edit = new EventEmitter<void>();
+  @Output() delete = new EventEmitter<void>();
 
-  isDeleteModalOpen: boolean = false; // Controle do modal
+  isDeleteModalOpen: boolean = false;
 
   onEdit() {
     this.edit.emit();
