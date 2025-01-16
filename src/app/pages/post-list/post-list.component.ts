@@ -5,11 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PostService } from '../../services/post.service';
 import { CommentsComponent } from '../../components/comments/comments.component';
-import { ActionButtonsComponent } from '../../components/action-buttons/action-buttons.component';
+import { ActionButtonsComponent } from '../../components/save-cancel-buttons/save-cancel-buttons.component.';
 import { EditDeleteButtonsInlineComponent } from '../../components/edit-delete-buttons/edit-delete-buttons.component';
 import { Comment } from '../../interface/comment.interface';
-
-
 
 @Component({
   selector: 'app-post-list',
@@ -78,11 +76,15 @@ export class PostListComponent implements OnInit {
     });
   }
   
-
-  deletePost(postId: number) {
-    this.postService.deletePost(postId).subscribe(() => {
-      this.posts = this.posts.filter((post) => post.id !== postId);
-      delete this.comments[postId];
+  deletePost(postId: number): void {
+    this.postService.deletePost(postId).subscribe({
+      next: () => {
+        this.posts = this.posts.filter(post => post.id !== postId);
+        console.log(`Post ${postId} excluído com sucesso.`);
+      },
+      error: (err) => {
+        console.error('Erro ao excluir o post:', err);
+      },
     });
   }
 

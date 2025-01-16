@@ -1,63 +1,48 @@
-<div class="container mx-auto p-4">
-  <h1 class="text-2xl font-bold mb-4">Lista de Posts</h1>
+<div class="border border-gray-300 rounded-lg p-4 mb-3 bg-white shadow-sm">
+  <h1 class="text-xl font-semibold mb-4">Lista de Posts</h1>
   <div *ngFor="let post of posts" class="border p-4 mb-4 rounded shadow">
-    <h2 class="text-xl font-semibold">{{ post.title }}</h2>
-    <p class="mb-2">{{ post.body }}</p>
+    <div class="flex items-center justify-between">
+      <div>
+        <h2 class="text-sm text-gray-600 font-semibold">{{ post.title }}</h2>
+        <p class="mb-2 text-gray-800">{{ post.body }}</p>
+      </div>
 
-    <!-- Botões de Ação -->
-    <app-edit-delete-buttons [editText]="'Editar'" [deleteText]="'Excluir'" (edit)="openEditPostModal(post)"
-      (delete)="deletePost(post.id)">
-    </app-edit-delete-buttons>
-
-    <!-- Componente de Comentários -->
-    <app-comments [postId]="post.id" (commentAdded)="onCommentAdded($event, post.id)"
-      (commentEdited)="onCommentEdited($event, post.id)"
-      (commentDeleted)="onCommentDeleted($event, post.id)"></app-comments>
-  </div>
-
-  <!-- Modal para editar as postagens -->
-  <div *ngIf="editingPost" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
-    <div class="bg-white p-6 rounded shadow-lg w-96">
-      <h2 class="text-xl font-bold mb-4">Editar Post</h2>
-      <form (ngSubmit)="savePostChanges()" #form="ngForm">
-        <label class="block mb-2">
-          <span class="text-gray-700">Título:</span>
-          <input 
-            [(ngModel)]="editingPost.title" 
-            name="title" 
-            class="w-full px-3 py-2 border rounded mt-1" 
-            [class.border-red-500]="form.submitted && !editingPost.title.trim()"
-            required 
-          />
-          <div *ngIf="form.submitted && !editingPost.title.trim()" class="text-red-500 text-sm">
-            O título não pode ser vazio ou conter apenas espaços.
-          </div>
-        </label>
-  
-        <label class="block mb-4">
-          <span class="text-gray-700">Corpo:</span>
-          <textarea 
-            [(ngModel)]="editingPost.body" 
-            name="body" 
-            class="w-full px-3 py-2 border rounded mt-1"
-            [class.border-red-500]="form.submitted && !editingPost.body.trim()"
-            required
-          ></textarea>
-          <div *ngIf="form.submitted && !editingPost.body.trim()" class="text-red-500 text-sm">
-            O corpo do post não pode ser vazio ou conter apenas espaços.
-          </div>
-        </label>
-  
-        <!-- Botões da modal para salvar edição -->
-        <app-action-buttons 
-          [confirmText]="'Salvar'" 
-          [cancelText]="'Cancelar'" 
-          (confirm)="savePostChanges()" 
-          (cancel)="closePostModal()" 
-          [disabled]="!editingPost.title.trim() || !editingPost.body.trim()"
-        >
-        </app-action-buttons>
-      </form>
+      <app-edit-delete-buttons [editText]="'Editar'" [deleteText]="'Excluir'" (edit)="openEditPostModal(post)"
+        (delete)="deletePost(post.id)">
+      </app-edit-delete-buttons>
     </div>
+
+    <app-comments [postId]="post.id" (commentAdded)="onCommentAdded($event, post.id)"
+      (commentEdited)="onCommentEdited($event, post.id)" (commentDeleted)="onCommentDeleted($event, post.id)">
+    </app-comments>
   </div>
-  
+</div>
+
+<div *ngIf="editingPost" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+  <div class="bg-white p-6 rounded shadow-lg w-96">
+    <h2 class="text-xl font-bold mb-4">Editar Post</h2>
+    <form (ngSubmit)="savePostChanges()" #form="ngForm">
+      <label class="block mb-2">
+        <span class="text-gray-700">Título:</span>
+        <input [(ngModel)]="editingPost.title" name="title" class="w-full px-3 py-2 border rounded mt-1"
+          [class.border-red-500]="form.submitted && !editingPost.title.trim()" required />
+        <div *ngIf="form.submitted && !editingPost.title.trim()" class="text-red-500 text-sm">
+          O título não pode ser vazio ou conter apenas espaços.
+        </div>
+      </label>
+
+      <label class="block mb-4">
+        <span class="text-gray-700">Corpo:</span>
+        <textarea [(ngModel)]="editingPost.body" name="body" class="w-full px-3 py-2 border rounded mt-1"
+          [class.border-red-500]="form.submitted && !editingPost.body.trim()" required></textarea>
+        <div *ngIf="form.submitted && !editingPost.body.trim()" class="text-red-500 text-sm">
+          O corpo do post não pode ser vazio ou conter apenas espaços.
+        </div>
+      </label>
+
+      <app-save-cancel-buttons [confirmText]="'Salvar'" [cancelText]="'Cancelar'" (confirm)="savePostChanges()"
+        (cancel)="closePostModal()" [disabled]="!editingPost.title.trim() || !editingPost.body.trim()">
+      </app-save-cancel-buttons>
+    </form>
+  </div>
+</div>

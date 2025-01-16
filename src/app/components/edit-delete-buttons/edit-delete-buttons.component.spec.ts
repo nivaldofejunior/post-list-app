@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditDeleteButtonsComponent } from './edit-delete-buttons.component';
+import { EditDeleteButtonsInlineComponent } from './edit-delete-buttons.component';
 
 describe('EditDeleteButtonsComponent', () => {
-  let component: EditDeleteButtonsComponent;
-  let fixture: ComponentFixture<EditDeleteButtonsComponent>;
+  let component: EditDeleteButtonsInlineComponent;
+  let fixture: ComponentFixture<EditDeleteButtonsInlineComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditDeleteButtonsComponent]
+      imports: [EditDeleteButtonsInlineComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EditDeleteButtonsComponent);
+    fixture = TestBed.createComponent(EditDeleteButtonsInlineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

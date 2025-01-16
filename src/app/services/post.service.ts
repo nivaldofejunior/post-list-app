@@ -50,8 +50,6 @@ export class PostService {
     );
   }
 
-  // Métodos para Comentários
-
   fetchComments(postId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.commentsApiUrl}?postId=${postId}`);
   }

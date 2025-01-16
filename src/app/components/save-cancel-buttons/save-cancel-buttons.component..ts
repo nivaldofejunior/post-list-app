@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-action-buttons',
-  templateUrl: './action-buttons.component.html',
-  styleUrls: ['./action-buttons.component.css'],
+  selector: 'app-save-cancel-buttons',
+  templateUrl: './save-cancel-buttons.component.html',
+  styleUrls: ['./save-cancel-buttons.component.css'],
   imports: [CommonModule]
 })
 export class ActionButtonsComponent {
@@ -18,6 +18,7 @@ export class ActionButtonsComponent {
   
 
   onConfirm() {
+    console.log("confirmei")
     this.confirm.emit();
   }
 

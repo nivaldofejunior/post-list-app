@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActionButtonsComponent } from './action-buttons.component';
+import { ActionButtonsComponent } from './save-cancel-buttons.component.';
 
 describe('ActionButtonsComponent', () => {
   let component: ActionButtonsComponent;

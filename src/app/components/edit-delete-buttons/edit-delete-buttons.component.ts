@@ -15,11 +15,27 @@ export class EditDeleteButtonsInlineComponent {
   @Output() edit = new EventEmitter<void>(); // Evento ao clicar no botão de edição
   @Output() delete = new EventEmitter<void>(); // Evento ao clicar no botão de exclusão
 
+  isDeleteModalOpen: boolean = false; // Controle do modal
+
   onEdit() {
     this.edit.emit();
   }
 
   onDelete() {
     this.delete.emit();
+  }
+
+  openDeleteModal(): void {
+    console.log(1)
+    this.isDeleteModalOpen = true;
+  }
+
+  closeDeleteModal(): void {
+    this.isDeleteModalOpen = false;
+  }
+
+  confirmDelete(): void {
+    this.delete.emit();
+    this.closeDeleteModal();
   }
 }

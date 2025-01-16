@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PostService } from '../../services/post.service';
-import { ActionButtonsComponent } from '../action-buttons/action-buttons.component';
+import { ActionButtonsComponent } from '../save-cancel-buttons/save-cancel-buttons.component.';
 import { EditDeleteButtonsInlineComponent } from '../edit-delete-buttons/edit-delete-buttons.component';
 
 @Component({
