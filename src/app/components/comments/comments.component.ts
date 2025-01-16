@@ -23,6 +23,7 @@ export class CommentsComponent implements OnInit {
   editingComment: any = null;
   newComment: any = { body: '' };
   comments: any[] = [];
+  isCommentEmpty: boolean = false;
 
   ngOnInit(): void {
     this.loadComments();
@@ -45,18 +46,23 @@ export class CommentsComponent implements OnInit {
   }
 
   addComment(): void {
-    if (this.newComment.body && this.newComment.body.trim()) {
-      const comment = {
-        id: Date.now(),
-        name: 'Usuário Anônimo',
-        body: this.newComment.body.trim()
-      };
-  
-      this.comments.push(comment);
-      this.newComment.body = '';
-    } else {
-      console.error('O comentário não pode estar vazio.');
+    if (!this.newComment.body.trim()) {
+      this.isCommentEmpty = true;
+      console.error('O comentário não pode estar vazio!');
+      return;
     }
+
+    this.isCommentEmpty = false;
+  
+    const newComment = {
+      id: Math.floor(Math.random() * 1000), // Gerar um ID fictício
+      body: this.newComment.body.trim(),
+      name: this.newComment.name?.trim() || 'Usuário Anônimo', // Nome ou "Usuário Anônimo"
+    };
+  
+    this.comments.push(newComment); // Adiciona o comentário à lista
+    this.newComment = { body: '', name: '' }; // Limpa os campos após adicionar o comentário
+    console.log('Comentário adicionado:', newComment);
   }
 
   editComment(comment: any): void {
