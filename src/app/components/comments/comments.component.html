@@ -15,38 +15,36 @@
     </div>
   </div>
 
-  <form (ngSubmit)="addComment()" class="mt-6">
-    <h4 class="font-bold text-gray-800 mb-2">Adicionar Comentário</h4>
+  <div class="mt-6">
+    <h4 class="font-bold text-gray-800 mb-2">Adicionar Comentário</h4>    
+    <div class="flex items-center space-x-4">
+      <textarea
+        [(ngModel)]="newComment.name"
+        name="name"
+        placeholder="Digite seu nome (opcional)"
+        class="flex-1 border border-gray-300 rounded-lg p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none">
+    </textarea>
   
-    <div class="mb-4">
-      <input 
-        [(ngModel)]="newComment.name" 
-        name="name" 
-        placeholder="Seu nome (opcional)" 
-        class="w-full border border-gray-300 rounded-lg p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-      />
-    </div>
-  
-    <div class="flex items-center">
-      <textarea 
-        [(ngModel)]="newComment.body" 
-        name="body" 
-        placeholder="Digite seu comentário" 
-        class="w-[90%] border border-gray-300 rounded p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none" 
-        required>
+      <textarea
+        [(ngModel)]="newComment.body"
+        name="body"
+        placeholder="Digite seu comentário"
+        class="flex-1 border border-gray-300 rounded-lg p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none">
       </textarea>
-
-      <div *ngIf="isCommentEmpty" class="text-red-500 text-sm ml-6">
-        O campo de comentário não pode estar vazio.
-      </div>
-      
-      <button 
-        type="submit" 
-        class="ml-7 px-6 py-3 bg-blue-500 text-white rounded shadow-md hover:bg-blue-600 transition">
+  
+      <button
+        type="submit"
+        (click)="addComment()"
+        class="px-6 py-3 bg-blue-500 text-white rounded shadow-md hover:bg-blue-600 transition">
         Adicionar
       </button>
     </div>
-  </form> 
+  
+    <div *ngIf="isCommentEmpty" class="text-red-500 text-sm mt-3">
+      O campo de comentário não pode estar vazio.
+    </div>
+  </div>
+  
 </div>
 
 <div *ngIf="isEditCommentModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">

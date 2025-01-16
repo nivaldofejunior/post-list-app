@@ -55,13 +55,13 @@ export class CommentsComponent implements OnInit {
     this.isCommentEmpty = false;
   
     const newComment = {
-      id: Math.floor(Math.random() * 1000), // Gerar um ID fictício
+      id: Math.floor(Math.random() * 1000),
       body: this.newComment.body.trim(),
-      name: this.newComment.name?.trim() || 'Usuário Anônimo', // Nome ou "Usuário Anônimo"
+      name: this.newComment.name?.trim() || 'Usuário Anônimo',
     };
   
-    this.comments.push(newComment); // Adiciona o comentário à lista
-    this.newComment = { body: '', name: '' }; // Limpa os campos após adicionar o comentário
+    this.comments.push(newComment);
+    this.newComment = { body: '', name: '' };
     console.log('Comentário adicionado:', newComment);
   }
 
